@@ -1,6 +1,6 @@
-// const withTM = require("next-transpile-modules")(["heic2any"]);
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+};
 
-// module.exports = withTM({
-//   reactStrictMode: true,
-// });
-// // 
+module.exports = nextConfig;
