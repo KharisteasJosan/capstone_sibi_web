@@ -17,28 +17,29 @@ export default function UploadClient() {
       file.type === "image/heic" ||
       file.name.toLowerCase().endsWith(".heic")
     ) {
-      try {
-        // Hanya import saat dibutuhkan di client
-        const heic2any = (await import("heic2any")).default;
+      if (typeof window !== "undefined") {
+        try {
+          const heic2any = (await import("heic2any")).default;
 
-        const convertedBlob = (await heic2any({
-          blob: file,
-          toType: "image/jpeg",
-        })) as Blob;
+          const convertedBlob = (await heic2any({
+            blob: file,
+            toType: "image/jpeg",
+          })) as Blob;
 
-        const convertedFile = new File(
-          [convertedBlob],
-          file.name.replace(/\.heic$/i, ".jpg"),
-          {
-            type: "image/jpeg",
-          }
-        );
+          const convertedFile = new File(
+            [convertedBlob],
+            file.name.replace(/\.heic$/i, ".jpg"),
+            {
+              type: "image/jpeg",
+            }
+          );
 
-        setSelectedFile(convertedFile);
-        setPreview(URL.createObjectURL(convertedFile));
-      } catch (err) {
-        console.error("Konversi HEIC gagal", err);
-        alert("Gagal mengonversi file HEIC. Coba gunakan format JPG/PNG.");
+          setSelectedFile(convertedFile);
+          setPreview(URL.createObjectURL(convertedFile));
+        } catch (err) {
+          console.error("Konversi HEIC gagal", err);
+          alert("Gagal mengonversi file HEIC. Coba gunakan format JPG/PNG.");
+        }
       }
     } else {
       setSelectedFile(file);
