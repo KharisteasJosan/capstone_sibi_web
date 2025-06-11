@@ -15,6 +15,7 @@ export default function HomePage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // ...
     if (
       file.type === "image/heic" ||
       file.name.toLowerCase().endsWith(".heic")
@@ -34,14 +35,18 @@ export default function HomePage() {
         );
 
         setSelectedFile(convertedFile);
-        setPreview(URL.createObjectURL(convertedFile));
+        if (typeof window !== "undefined") {
+          setPreview(URL.createObjectURL(convertedFile));
+        }
       } catch (err) {
         console.error("Konversi HEIC gagal", err);
         alert("Gagal mengonversi file HEIC. Coba gunakan format JPG/PNG.");
       }
     } else {
       setSelectedFile(file);
-      setPreview(URL.createObjectURL(file));
+      if (typeof window !== "undefined") {
+        setPreview(URL.createObjectURL(file));
+      }
     }
   };
 

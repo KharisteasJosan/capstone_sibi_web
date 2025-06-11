@@ -10,9 +10,12 @@ export default function KamusIsyaratPage() {
   return (
     <main className="min-h-screen bg-white flex flex-col items-center justify-center px-6 py-10">
       <div className="max-w-5xl w-full space-y-6">
-        <h1 className="text-3xl font-bold text-gray-800 text-center">Kamus Isyarat (SIBI)</h1>
+        <h1 className="text-3xl font-bold text-gray-800 text-center">
+          Kamus Isyarat (SIBI)
+        </h1>
         <p className="text-gray-600 text-lg text-center">
-          Berikut adalah daftar huruf dan representasi isyarat tangan berdasarkan Sistem Isyarat Bahasa Indonesia (SIBI).
+          Berikut adalah daftar huruf dan representasi isyarat tangan
+          berdasarkan Sistem Isyarat Bahasa Indonesia (SIBI).
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-6 justify-items-center">
@@ -31,7 +34,9 @@ export default function KamusIsyaratPage() {
                   className="w-24 h-24 object-contain border rounded-lg shadow"
                 />
               )}
-              <span className="mt-2 text-sm font-medium">{char.toUpperCase()}</span>
+              <span className="mt-2 text-sm font-medium">
+                {char.toUpperCase()}
+              </span>
             </div>
           ))}
         </div>
