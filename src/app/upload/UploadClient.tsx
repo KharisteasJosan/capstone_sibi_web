@@ -1,27 +1,26 @@
-// src/app/upload/UploadClient.tsx
 "use client";
 
 import React, { useState } from "react";
-import heic2any from "heic2any";
 import { useRouter } from "next/navigation";
 
 export default function UploadClient() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [result, setResult] = useState("");
   const [preview, setPreview] = useState<string | null>(null);
-
   const router = useRouter();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // ...
     if (
       file.type === "image/heic" ||
       file.name.toLowerCase().endsWith(".heic")
     ) {
       try {
+        // Hanya import saat dibutuhkan di client
+        const heic2any = (await import("heic2any")).default;
+
         const convertedBlob = (await heic2any({
           blob: file,
           toType: "image/jpeg",
@@ -36,18 +35,14 @@ export default function UploadClient() {
         );
 
         setSelectedFile(convertedFile);
-        if (typeof window !== "undefined") {
-          setPreview(URL.createObjectURL(convertedFile));
-        }
+        setPreview(URL.createObjectURL(convertedFile));
       } catch (err) {
         console.error("Konversi HEIC gagal", err);
         alert("Gagal mengonversi file HEIC. Coba gunakan format JPG/PNG.");
       }
     } else {
       setSelectedFile(file);
-      if (typeof window !== "undefined") {
-        setPreview(URL.createObjectURL(file));
-      }
+      setPreview(URL.createObjectURL(file));
     }
   };
 
@@ -132,7 +127,6 @@ export default function UploadClient() {
           </div>
         )}
 
-        {/* Tombol kembali */}
         <button
           onClick={() => router.push("/")}
           className="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md font-medium shadow transition duration-200 w-full"
