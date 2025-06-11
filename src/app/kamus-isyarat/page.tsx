@@ -23,13 +23,13 @@ export default function KamusIsyaratPage() {
             <div key={char} className="flex flex-col items-center">
               {char === "j" || char === "z" ? (
                 <video
-                  src={`/sibi/${char}.mp4`}
+                  src={`/sibi/${char.toUpperCase()}.mp4`}
                   controls
                   className="w-24 h-24 object-contain border rounded-lg shadow"
                 />
               ) : (
                 <img
-                  src={`/sibi/${char}.jpg`}
+                  src={`/sibi/${char.toUpperCase()}.jpg`}
                   alt={`Isyarat ${char.toUpperCase()}`}
                   className="w-24 h-24 object-contain border rounded-lg shadow"
                 />
