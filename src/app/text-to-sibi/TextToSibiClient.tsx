@@ -32,13 +32,13 @@ export default function TextToSibiClient() {
             <div key={idx} className="text-center">
               {char === "j" || char === "z" ? (
                 <video
-                  src={`/sibi/${char}.mp4`}
+                  src={`/sibi/${char.toUpperCase()}.mp4`}
                   controls
                   className="w-24 h-24 object-contain border rounded-lg shadow"
                 />
               ) : (
                 <img
-                  src={`/sibi/${char}.jpg`}
+                  src={`/sibi/${char.toUpperCase()}.jpg`}
                   alt={char}
                   className="w-24 h-24 object-contain border rounded-lg shadow"
                 />
